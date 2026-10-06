@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>juizviana | Artigos para árbitros de alta performance</title>
+    <style>
+        :root {
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            --bg: #f5f6f4;
+            --card: #fff;
+            --tx: #0e1a14;
+            --mut: #5b6760;
+            --br: #dfe3df;
+            --pri: #0b6b3a;
+            --acc: #f4c20d;
+            --red: #d62828;
+            --hd: #0b1f15
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #0c1511;
+                --card: #14211a;
+                --tx: #eef3ef;
+                --mut: #9aaaa1;
+                --br: #25362c;
+                --pri: #2fb36b;
+                --hd: #050c08
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #0c1511;
+            --card: #14211a;
+            --tx: #eef3ef;
+            --mut: #9aaaa1;
+            --br: #25362c;
+            --pri: #2fb36b;
+            --hd: #050c08
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px);
+            scroll-behavior: smooth
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--tx);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.5
+        }
+
+        header {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 20;
+            background: var(--hd);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 5%
+        }
+
+        header nav {
+            display: flex;
+            gap: 22px
+        }
+
+        header a {
+            color: #cfd9d3;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600
+        }
+
+        header a:hover {
+            color: var(--acc)
+        }
+
+        .cartbtn {
+            background: var(--acc);
+            color: #111;
+            border: 0;
+            border-radius: 999px;
+            padding: 9px 16px;
+            font-weight: 800;
+            cursor: pointer
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--hd), #0b6b3a);
+            color: #fff;
+            padding: 70px 5%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+            align-items: center
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 5vw, 52px);
+            line-height: 1.05;
+            margin: 0 0 14px
+        }
+
+        .hero h1 span {
+            color: var(--acc)
+        }
+
+        .hero p {
+            color: #d3e2d9;
+            max-width: 520px
+        }
+
+        .cta {
+            display: inline-block;
+            background: var(--acc);
+            color: #111;
+            padding: 13px 26px;
+            border-radius: 8px;
+            font-weight: 800;
+            text-decoration: none;
+            margin-top: 10px
+        }
+
+        .stats {
+            display: flex;
+            gap: 28px;
+            margin-top: 28px;
+            flex-wrap: wrap
+        }
+
+        .stats b {
+            display: block;
+            font-size: 24px;
+            color: var(--acc)
+        }
+
+        .stats small {
+            color: #b9cfc2
+        }
+
+        section {
+            padding: 50px 5%
+        }
+
+        h2 {
+            font-size: 28px;
+            margin: 0 0 6px
+        }
+
+        .sub {
+            color: var(--mut);
+            margin: 0 0 24px
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 22px
+        }
+
+        .filters button {
+            border: 1px solid var(--br);
+            background: var(--card);
+            color: var(--tx);
+            padding: 8px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        .filters button.on {
+            background: var(--pri);
+            color: #fff;
+            border-color: var(--pri)
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--br);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform .2s, box-shadow .2s
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .12)
+        }
+
+        .card .img {
+            background: linear-gradient(160deg, #e8efe9, #cfe0d4);
+            aspect-ratio: 1/1;
+            display: grid;
+            place-items: center;
+            position: relative
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) .card .img {
+                background: linear-gradient(160deg, #1c3025, #142a1d)
+            }
+        }
+
+        .card .img svg {
+            width: 70%;
+            height: 70%
+        }
+
+        .tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--red);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 5px
+        }
+
+        .card .in {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1
+        }
+
+        .card small {
+            color: var(--mut);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: .06em
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 16px
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--mut);
+            font-size: 13px;
+            flex: 1
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--pri)
+        }
+
+        .price s {
+            font-size: 13px;
+            color: var(--mut);
+            font-weight: 400;
+            margin-left: 6px
+        }
+
+        .add {
+            background: var(--pri);
+            color: #fff;
+            border: 0;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .add:hover {
+            filter: brightness(1.1)
+        }
+
+        .feat {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px
+        }
+
+        .feat div {
+            background: var(--card);
+            border: 1px solid var(--br);
+            border-radius: 12px;
+            padding: 20px
+        }
+
+        .feat b {
+            display: block;
+            margin-bottom: 4px
+        }
+
+        .feat span {
+            color: var(--mut);
+            font-size: 14px
+        }
+
+        footer {
+            background: var(--hd);
+            color: #9fb5a8;
+            padding: 30px 5%;
+            font-size: 14px;
+            text-align: center
+        }
+
+        .ov {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .5);
+            opacity: 0;
+            pointer-events: none;
+            transition: .25s;
+            z-index: 30
+        }
+
+        .ov.open {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(400px, 100%);
+            background: var(--card);
+            z-index: 31;
+            transform: translateX(100%);
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        .drawer.open {
+            transform: none
+        }
+
+        .dh {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--br)
+        }
+
+        .dh h3 {
+            margin: 0
+        }
+
+        .x {
+            background: none;
+            border: 0;
+            font-size: 26px;
+            cursor: pointer;
+            color: var(--tx)
+        }
+
+        .items {
+            flex: 1;
+            overflow: auto;
+            padding: 10px 20px
+        }
+
+        .it {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--br)
+        }
+
+        .it .t {
+            width: 54px;
+            height: 54px;
+            border-radius: 8px;
+            background: #d9e7de;
+            display: grid;
+            place-items: center;
+            flex: none
+        }
+
+        .it .t svg {
+            width: 36px;
+            height: 36px
+        }
+
+        .it .n {
+            flex: 1;
+            font-size: 14px
+        }
+
+        .it .n b {
+            display: block
+        }
+
+        .qty {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px
+        }
+
+        .qty button {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 1px solid var(--br);
+            background: var(--bg);
+            color: var(--tx);
+            cursor: pointer
+        }
+
+        .rm {
+            background: none;
+            border: 0;
+            color: var(--red);
+            cursor: pointer;
+            font-size: 12px
+        }
+
+        .df {
+            padding: 16px 20px;
+            border-top: 1px solid var(--br)
+        }
+
+        .tot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 12px
+        }
+
+        .fin {
+            width: 100%;
+            background: var(--acc);
+            color: #111;
+            border: 0;
+            border-radius: 8px;
+            padding: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 15px
+        }
+
+        .empty {
+            text-align: center;
+            color: var(--mut);
+            padding: 40px 0
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+            transform: translate(-50%, 80px);
+            background: var(--hd);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            z-index: 40;
+            transition: .3s;
+            opacity: 0
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1
+        }
+
+        @media(max-width:760px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 44px 5%
+            }
+
+            header nav {
+                display: none
+            }
+
+            .hero .lg {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <svg id="logo" width="190" height="42" viewBox="0 0 190 42" aria-label="juizviana">
+            <circle cx="21" cy="21" r="19" fill="#f4c20d" />
+            <path d="M10 18h16a7 7 0 1 1-6 10.5L12 28z" fill="#0b1f15" />
+            <circle cx="26" cy="25" r="3" fill="#f4c20d" />
+            <rect x="9" y="14" width="13" height="4" rx="2" fill="#0b1f15" />
+            <rect x="30" y="6" width="9" height="13" rx="1.5" fill="#d62828" transform="rotate(14 34 12)" />
+            <text x="50" y="27" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="22"
+                fill="#fff">juiz<tspan fill="#f4c20d">viana</tspan></text>
+            <text x="51" y="38" font-family="Arial,sans-serif" font-size="7.5" letter-spacing="2.4"
+                fill="#9fb5a8">REFEREE GEAR PRO</text>
+        </svg>
+        <nav><a href="#produtos">Produtos</a><a href="#diferenciais">Diferenciais</a><a href="#contato">Contato</a>
+        </nav>
+        <button class="cartbtn" id="openCart">🛒 Carrinho (<span id="cnt">0</span>)</button>
+    </header>
+
+    <div class="hero">
+        <div>
+            <h1>Equipamento de <span>alta performance</span> para quem comanda o jogo.</h1>
+            <p>Apitos, cartões, bandeirolas, uniformes e tecnologia usados por árbitros profissionais. Tudo em um só
+                lugar.</p>
+            <a class="cta" href="#produtos">Ver produtos</a>
+            <div class="stats">
+                <div><b>+10 mil</b><small>árbitros atendidos</small></div>
+                <div><b>12x</b><small>sem juros</small></div>
+                <div><b>24h</b><small>envio rápido</small></div>
+            </div>
+        </div>
+        <div class="lg" id="heroImg"></div>
+    </div>
+
+    <section id="produtos">
+        <h2>Nossos produtos</h2>
+        <p class="sub">Preços de referência de varejo esportivo no Brasil.</p>
+        <div class="filters" id="filters"></div>
+        <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="diferenciais">
+        <h2>Por que a juizviana?</h2>
+        <p class="sub">&nbsp;</p>
+        <div class="feat">
+            <div><b>🏆 Padrão profissional</b><span>Marcas homologadas usadas em campeonatos oficiais.</span></div>
+            <div><b>🚚 Envio para todo o Brasil</b><span>Despacho em até 24h úteis.</span></div>
+            <div><b>🔒 Compra segura</b><span>Pix, cartão em até 12x e boleto.</span></div>
+            <div><b>↩️ Troca em 30 dias</b><span>Não gostou? Trocamos sem burocracia.</span></div>
+        </div>
+    </section>
+
+    <footer id="contato">
+        © 2026 juizviana — Artigos para árbitros de futebol · contato@juizviana.com.br · WhatsApp (11) 90000-0000
+    </footer>
+
+    <div class="ov" id="ov"></div>
+    <aside class="drawer" id="drawer">
+        <div class="dh">
+            <h3>Seu carrinho</h3><button class="x" id="closeCart">×</button>
+        </div>
+        <div class="items" id="items"></div>
+        <div class="df">
+            <div class="tot"><span>Total</span><span id="total">R$ 0,00</span></div><button class="fin"
+                id="fin">Finalizar compra</button>
+        </div>
+    </aside>
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const S = {
+            whistle: '<svg viewBox="0 0 100 100"><path d="M18 40h42a22 22 0 1 1-20 31L26 66z" fill="#111"/><circle cx="62" cy="62" r="11" fill="#e8efe9"/><rect x="10" y="32" width="38" height="12" rx="5" fill="#d62828"/><circle cx="62" cy="62" r="4" fill="#111"/><path d="M80 30q8-10 14-4" stroke="#111" stroke-width="3" fill="none"/></svg>',
+            cards: '<svg viewBox="0 0 100 100"><rect x="18" y="22" width="40" height="56" rx="5" fill="#f4c20d" transform="rotate(-12 38 50)"/><rect x="42" y="22" width="40" height="56" rx="5" fill="#d62828" transform="rotate(12 62 50)"/></svg>',
+            flag: '<svg viewBox="0 0 100 100"><rect x="30" y="10" width="5" height="82" fill="#222"/><rect x="35" y="14" width="44" height="30" fill="#f4c20d"/><path d="M57 14v30M35 29h44" stroke="#d62828" stroke-width="0"/><polygon points="57,14 79,14 79,44 57,44" fill="#d62828"/></svg>',
+            shirt: '<svg viewBox="0 0 100 100"><path d="M32 14l-22 14 9 14 9-5v45h44V37l9 5 9-14-22-14q-8 8-18 8t-18-8z" fill="#111"/><path d="M38 14q12 10 24 0" stroke="#f4c20d" stroke-width="3" fill="none"/><rect x="38" y="50" width="24" height="6" fill="#f4c20d"/></svg>',
+            watch: '<svg viewBox="0 0 100 100"><rect x="38" y="6" width="24" height="88" rx="8" fill="#222"/><circle cx="50" cy="50" r="26" fill="#111"/><circle cx="50" cy="50" r="21" fill="#0b6b3a"/><path d="M50 36v15l10 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>',
+            socks: '<svg viewBox="0 0 100 100"><path d="M30 10h24v46l22 16q8 8-2 16-10 4-22-6L30 66z" fill="#111"/><rect x="30" y="10" width="24" height="10" fill="#f4c20d"/></svg>',
+            book: '<svg viewBox="0 0 100 100"><rect x="24" y="12" width="52" height="76" rx="4" fill="#0b1f15"/><rect x="32" y="22" width="36" height="8" fill="#f4c20d"/><path d="M32 42h36M32 52h36M32 62h26" stroke="#9fb5a8" stroke-width="3"/></svg>',
+            coin: '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="#f4c20d"/><circle cx="50" cy="50" r="26" fill="none" stroke="#a37f00" stroke-width="3"/><path d="M42 56l8-20 8 20M45 50h10" stroke="#7a5e00" stroke-width="4" fill="none"/></svg>',
+            spray: '<svg viewBox="0 0 100 100"><rect x="34" y="34" width="32" height="56" rx="6" fill="#e8efe9" stroke="#999" stroke-width="2"/><rect x="34" y="50" width="32" height="20" fill="#0b6b3a"/><rect x="40" y="20" width="20" height="14" fill="#222"/><rect x="46" y="10" width="14" height="10" fill="#d62828"/></svg>'
+        };
+        const P = [
+            { id: 1, n: 'Apito Fox 40 Classic', c: 'Apitos', p: 69.9, o: 84.9, i: 'whistle', d: 'O apito dos profissionais. Sem bolinha, som potente.' },
+            { id: 2, n: 'Kit Cartões Amarelo e Vermelho', c: 'Acessórios', p: 29.9, i: 'cards', d: 'Cartões rígidos, com furo para marcar nome e minuto.' },
+            { id: 3, n: 'Bandeirola de Assistente', c: 'Acessórios', p: 119.9, o: 139.9, i: 'flag', d: 'Haste leve em alumínio e bandeira bicolor oficial.' },
+            { id: 4, n: 'Camisa de Árbitro Pro', c: 'Uniformes', p: 189.9, i: 'shirt', d: 'Tecido dry-fit leve, gola reforçada e costura reta.' },
+            { id: 5, n: 'Relógio GPS Garmin Forerunner 55', c: 'Tecnologia', p: 1299, o: 1499, i: 'watch', d: 'GPS, frequência cardíaca e controle de ritmo em campo.' },
+            { id: 6, n: 'Meião Profissional Preto', c: 'Uniformes', p: 39.9, i: 'socks', d: 'Cano alto com compressão e proteção anti-bolhas.' },
+            { id: 7, n: 'Caderneta de Súmula', c: 'Acessórios', p: 24.9, i: 'book', d: 'Capa dura e papel resistente à umidade.' },
+            { id: 8, n: 'Moeda de Sorteio Oficial', c: 'Acessórios', p: 19.9, i: 'coin', d: 'Moeda dourada para o sorteio de campo.' },
+            { id: 9, n: 'Spray de Espuma Marcação de Barreira', c: 'Acessórios', p: 39.9, i: 'spray', d: 'Espuma de desaparecimento rápido para a barreira.' }
+        ];
+        const $ = s => document.querySelector(s), brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        let cart = {}, cat = 'Todos';
+        try { cart = JSON.parse(localStorage.getItem('jv_cart') || '{}') } catch (e) { }
+        const save = () => { try { localStorage.setItem('jv_cart', JSON.stringify(cart)) } catch (e) { } };
+        $('#heroImg').innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">' + ['whistle', 'cards', 'flag', 'watch'].map(k => '<div style="background:rgba(255,255,255,.1);border-radius:16px;padding:18px">' + S[k] + '</div>').join('') + '</div>';
+        function filters() { const cs = ['Todos', ...new Set(P.map(x => x.c))]; $('#filters').innerHTML = cs.map(c => `<button class="${c === cat ? 'on' : ''}" data-c="${c}">${c}</button>`).join(''); }
+        function grid() { $('#grid').innerHTML = P.filter(x => cat === 'Todos' || x.c === cat).map(x => `<div class="card"><div class="img">${x.o ? '<span class="tag">OFERTA</span>' : ''}${S[x.i]}</div><div class="in"><small>${x.c}</small><h3>${x.n}</h3><p>${x.d}</p><div class="price">${brl(x.p)}${x.o ? `<s>${brl(x.o)}</s>` : ''}</div><button class="add" data-id="${x.id}">Adicionar ao carrinho</button></div></div>`).join(''); }
+        function render() {
+            const ids = Object.keys(cart).filter(k => P.find(p => p.id == k)); let t = 0, n = 0;
+            $('#items').innerHTML = ids.length ? ids.map(k => { const p = P.find(x => x.id == k), q = cart[k]; t += p.p * q; n += q; return `<div class="it"><div class="t">${S[p.i]}</div><div class="n"><b>${p.n}</b>${brl(p.p)}<div class="qty"><button data-m="${k}">−</button>${q}<button data-a="${k}">+</button></div></div><button class="rm" data-r="${k}">Remover</button></div>` }).join('') : '<div class="empty">Seu carrinho está vazio.</div>';
+            $('#total').textContent = brl(t); $('#cnt').textContent = n; save();
+        }
+        function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800) }
+        const open = o => { $('#drawer').classList.toggle('open', o); $('#ov').classList.toggle('open', o) };
+        document.addEventListener('click', e => {
+            const d = e.target.dataset;
+            if (d.c) { cat = d.c; filters(); grid() }
+            if (d.id) { cart[d.id] = (cart[d.id] || 0) + 1; render(); toast('Adicionado ao carrinho ✓') }
+            if (d.a) { cart[d.a]++; render() }
+            if (d.m) { if (--cart[d.m] <= 0) delete cart[d.m]; render() }
+            if (d.r) { delete cart[d.r]; render() }
+        });
+        $('#openCart').onclick = () => open(true); $('#closeCart').onclick = $('#ov').onclick = () => open(false);
+        $('#fin').onclick = () => { if (!Object.keys(cart).length) return toast('Carrinho vazio'); cart = {}; render(); open(false); toast('Pedido recebido! Obrigado 🙌') };
+        filters(); grid(); render();
+    </script>
+</body>
+
+</html>
